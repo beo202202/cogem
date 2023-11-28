@@ -79,7 +79,10 @@ def process_image(image_path, file_index):
 
         
         # 폴더 안의 모든 이미지와 비교
-        folders = ['Skill_Core\\Eunwol', 'Common_Core']
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        eunwol_path = os.path.join(script_dir, 'Skill_Core', 'Eunwol')
+        common_core_path = os.path.join(script_dir, 'Common_Core')
+        folders = [eunwol_path, common_core_path]
         matched_img_path = None
 
         for folder in folders:

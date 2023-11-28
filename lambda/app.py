@@ -8,8 +8,14 @@ from firebase_admin import credentials
 from firebase_admin import messaging
 import re
 
-# Firebase Admin SDK 초기화
-cred = credentials.Certificate('firebase-adminsdk.json')
+# 현재 스크립트 파일의 디렉토리 경로를 구합니다.
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 상대 경로를 사용하여 'firebase-adminsdk.json' 파일의 전체 경로를 구합니다.
+firebase_sdk_path = os.path.join(script_dir, 'firebase-adminsdk.json')
+
+# Firebase Admin SDK를 초기화합니다.
+cred = credentials.Certificate(firebase_sdk_path)
 firebase_admin.initialize_app(cred)
 
 app = Flask(__name__)
