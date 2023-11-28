@@ -11,6 +11,21 @@
     <title>Image Gallery</title>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            {% if page > 1 %}
+                <a href="{{ url_for('display_images', page=page-1) }}" class="btn btn-primary">이전</a>
+            {% endif %}
+        </div>
+        <div class="col-md-6 text-end">
+            {% if has_next %}
+                <a href="{{ url_for('display_images', page=page+1) }}" class="btn btn-primary">다음</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
 <div class="container mt-5">
     {% for table_index in range(0, len(gallery), 8) %}
         <table class="table table-bordered mb-5">
@@ -40,21 +55,6 @@
             </tbody>
         </table>
     {% endfor %}
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            {% if page > 1 %}
-                <a href="{{ url_for('display_images', page=page-1) }}" class="btn btn-primary">이전</a>
-            {% endif %}
-        </div>
-        <div class="col-md-6 text-end">
-            {% if has_next %}
-                <a href="{{ url_for('display_images', page=page+1) }}" class="btn btn-primary">다음</a>
-            {% endif %}
-        </div>
-    </div>
 </div>
 
 <!-- Optional JavaScript; choose one of the two! -->
