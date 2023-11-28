@@ -20,8 +20,8 @@ firebase_admin.initialize_app(cred)
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'uploads/'
-PROCESSED_FOLDER = 'processed/'
+UPLOAD_FOLDER = 'lambda/uploads/'
+PROCESSED_FOLDER = 'lambda/processed/'
 
 @app.route('/', methods=['GET'])
 def upload_form():
@@ -36,16 +36,31 @@ def upload_form():
     </body>
     </html>
     '''
-
+def clear_folder(folder_path):
+    # 폴더가 존재하는지 확인
+    if os.path.exists(folder_path):
+        # 폴더 안의 모든 파일을 순회
+        for file_name in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, file_name)
+            # 파일이면 삭제
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+            # 디렉토리이면 해당 디렉토리를 재귀적으로 비움
+            elif os.path.isdir(file_path):
+                clear_folder(file_path)
+                os.rmdir(file_path)  # 내부 파일이 삭제된 후, 빈 디렉토리 삭제
+                
 @app.route('/upload', methods=['POST'])
 def upload_file():
     # 기존의 파일들 삭제
-    if os.path.exists(UPLOAD_FOLDER):
-        shutil.rmtree(UPLOAD_FOLDER)
-    if os.path.exists(PROCESSED_FOLDER):
-        shutil.rmtree(PROCESSED_FOLDER)
-    os.makedirs(UPLOAD_FOLDER)
-    os.makedirs(PROCESSED_FOLDER)
+    clear_folder(UPLOAD_FOLDER)
+    clear_folder(PROCESSED_FOLDER)
+    # if os.path.exists(UPLOAD_FOLDER):
+    #     shutil.rmtree(UPLOAD_FOLDER)
+    # if os.path.exists(PROCESSED_FOLDER):
+    #     shutil.rmtree(PROCESSED_FOLDER)
+    # os.makedirs(UPLOAD_FOLDER)
+    # os.makedirs(PROCESSED_FOLDER)
     
     uploaded_files = request.files.getlist('files')
     valid_files = [f for f in uploaded_files if f and f.filename.endswith('.png')]
@@ -101,15 +116,15 @@ def display_images(page):
     end_index = start_index + images_per_page
 
     # 모든 처리된 이미지 폴더를 가져옵니다.
-    processed_folders = sorted_nicely([f for f in os.listdir('processed') if f.startswith('image_')])
+    processed_folders = sorted_nicely([f for f in os.listdir(PROCESSED_FOLDER) if f.startswith('image_')])
 
     # 페이지 범위 내의 이미지 폴더만 선택합니다.
     current_page_folders = processed_folders[start_index:end_index]
 
     gallery = []
     for folder in current_page_folders:
-        image_folder = os.path.join('processed', folder)
-        user_folder = os.path.join('processed', folder.replace('image_', 'user_'))
+        image_folder = os.path.join(PROCESSED_FOLDER, folder)
+        user_folder = os.path.join(PROCESSED_FOLDER, folder.replace('image_', 'user_'))
 
         # 각 폴더에서 이미지 파일을 가져와 URL을 생성합니다.
         image_files = sorted_nicely([f for f in os.listdir(image_folder) if f.startswith("extracted_")])

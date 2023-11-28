@@ -4,6 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
+UPLOAD_FOLDER = 'lambda/uploads/'
+PROCESSED_FOLDER = 'lambda/processed/'
+
 # 1920 좌표
 absolute_boxes = [
     (1004, 733, 32, 32),
@@ -46,7 +49,7 @@ classified_coords = {
     '2st': ((12, 3), (20, 11)),
     '3st': ((18, 16), (29, 29))
 }
-
+        
 def extract_regions_from_large_image(image_path, offset, boxes):
     large_image = cv2.imread(image_path)
     extracted_regions = []
@@ -65,7 +68,7 @@ def process_image(image_path, file_index):
     extracted_regions = extract_regions_from_large_image(image_path, (0, 0), absolute_boxes)
 
     # 추출된 영역들을 각각의 폴더에 저장합니다.
-    output_folder = os.path.join('processed', f"image_{file_index + 1:02}")
+    output_folder = os.path.join(PROCESSED_FOLDER, f"image_{file_index + 1:02}")
     # 폴더가 없으면 생성
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -110,7 +113,7 @@ def process_image(image_path, file_index):
             # plt.show()
         else:
             # 추출된 이미지들을 각각의 폴더에 저장합니다.
-            user_folder = os.path.join('processed', f"user_{file_index + 1:02}")
+            user_folder = os.path.join(PROCESSED_FOLDER, f"user_{file_index + 1:02}")
             # 폴더가 없으면 생성
             if not os.path.exists(user_folder):
                 os.makedirs(user_folder)
