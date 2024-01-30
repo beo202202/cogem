@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Core Analysis Result</title>
+  </head>
+  <body>
+    <h1>Core Analysis Result</h1>
+    <div>
+      {% for image, matched_image in images %}
+      <div>
+        <p>
+          {{ image }}: {% if matched_image %} {{ matched_image }} {% else %} No
+          Match {% endif %}
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
