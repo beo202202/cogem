@@ -1,0 +1,122 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>코젬 조합기</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/css/home.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/js/home.js"></script>
+  </head>
+  <body class="bg-dark text-white">
+    <div class="tab">
+      <button
+        class="tablinks"
+        id="defaultOpen"
+        onclick="openTab(event, 'DataInput')"
+      >
+        데이터 입력
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'AnalysisResult')">
+        입력값 분석결과
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'Combination')">
+        조합 찾기
+      </button>
+    </div>
+
+    <div id="DataInput" class="tabcontent">
+      <div class="left-side">
+        <!-- 업로드 폼 -->
+        <form
+          name="uploadForm"
+          id="uploadForm"
+          action="/upload"
+          method="post"
+          enctype="multipart/form-data"
+          onsubmit="return validateForm()"
+        >
+          <div class="filebox">
+            <input
+              class="form-control form-control-lg form-color"
+              type="file"
+              name="files"
+              id="files"
+              multiple
+              accept=".png,.jpg, .jpeg"
+            />
+          </div>
+          <br />
+
+          <select id="characterSelect">
+            <option value="adventurer" selected>모험가</option>
+            <option value="hero">영웅</option>
+            <!-- 다른 옵션들 추가 -->
+          </select>
+
+          <div id="adventurerOptions" class="optionGroup" style="display: none">
+            <input type="radio" id="불독" name="불독" value="불독" />
+            <label for="불독">불독</label>
+            <input
+              type="radio"
+              id="iceLightning"
+              name="class"
+              value="iceLightning"
+            />
+            <label for="iceLightning">썬콜</label>
+            <input type="radio" id="bishop" name="class" value="bishop" />
+            <label for="bishop">비숍</label>
+          </div>
+
+          <div id="heroOptions" class="optionGroup" style="display: none">
+            <input type="radio" id="aran" name="class" value="aran" />
+            <label for="aran">아란</label>
+            <input type="radio" id="eunwol" name="class" value="eunwol" />
+            <label for="eunwol">은월</label>
+            <!-- 다른 옵션들 추가 -->
+          </div>
+        </form>
+      </div>
+      <input type="button" value="코어 정보 확인하기" id="checkCoreInfo" />
+      <button id="makeTable">테이블 만들기</button>
+      <button id="viewAnalyze">분석 보기</button>
+
+      <div id="image-preview">
+        <img />
+        <button id="button prev" class="button prev">&#10094;</button>
+        <button id="button next" class="button next">&#10095;</button>
+      </div>
+      <div class="result" id="result1">
+        <!-- 결과를 표시할 부분 -->
+      </div>
+    </div>
+
+    <div id="AnalysisResult" class="tabcontent">
+      <div class="result" id="result2">
+        <!-- AJAX 호출로부터 받은 HTML이 여기에 삽입됩니다 -->
+      </div>
+      <!-- <p>여기에 분석 결과 관련 내용이 표시됩니다.</p> -->
+    </div>
+
+    <div id="Combination" class="tabcontent">
+      <h3>조합 찾기</h3>
+      <p>여기에 조합을 찾는 기능 관련 내용이 표시됩니다.</p>
+    </div>
+
+    <!-- GIF 이미지를 표시할 컨테이너 -->
+    <div id="gif-container"></div>
+    <!-- 토스트 메시지 컨테이너 -->
+    <div id="toast"></div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

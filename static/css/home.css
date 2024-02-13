@@ -1,0 +1,293 @@
+/* 전체 페이지 배경색 및 기본 텍스트 색상 설정 */
+body {
+  background-color: #000; /* 배경색을 검정색으로 설정 */
+  color: #fff; /* 기본 텍스트 색상을 흰색으로 설정 */
+  font-family: Arial, sans-serif; /* 폰트 스타일 */
+}
+
+/* 전체 웹사이트에 적용 */
+html {
+  scrollbar-color: #00ff00 #333; /* 스크롤바 색상 및 스크롤바 트랙 색상 */
+}
+
+/* Chrome, Edge, Safari 등에서 작동 */
+::-webkit-scrollbar {
+  width: 6px; /* 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-track {
+  background: #333; /* 스크롤바 트랙의 색상 */
+  border-radius: 3px; /* 트랙 모서리의 둥근 정도 */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00ff00; /* 스크롤바 색상 (형광 녹색) */
+  border-radius: 3px; /* 스크롤바 모서리의 둥근 정도 */
+  border: 3px solid #333; /* 스크롤바 트랙에 대한 테두리 색상 */
+}
+
+/* 스크롤바의 버튼 제거 (위, 아래 버튼) */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+#coreInfo::-webkit-scrollbar {
+  width: 12px; /* 스크롤바의 너비 조정 */
+}
+
+#coreInfo::-webkit-scrollbar-track {
+  background: #333; /* 스크롤바 트랙의 색상 */
+  border-radius: 10px; /* 스크롤바 트랙을 둥글게 */
+}
+
+#coreInfo::-webkit-scrollbar-thumb {
+  background-color: #00ff00; /* 스크롤바 색상 (형광 녹색) */
+  border-radius: 10px; /* 스크롤바 썸을 둥글게 */
+  border: 3px solid #333; /* 스크롤바 썸에 대한 테두리 색상 */
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #333; /* 탭 배경색을 검정색 계열로 조정 */
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #555;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #444; /* 활성 탭의 배경색을 어두운 회색으로 조정 */
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  /* border: 1px solid #ccc; */
+  border-top: none;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.form-color {
+  background-color: #555;
+  color: #ddd;
+}
+
+#coreInfoWrapper {
+  width: 100%; /* 부모 div의 너비를 100%로 설정하여 전체 화면 너비에 맞게 확장됩니다. */
+  height: 78vh;
+  margin: 0 auto; /* 가운데 정렬 (선택사항) */
+  border: 1px solid #ccc; /* 테두리 스타일 (선택사항) */
+  overflow: auto; /* 위아래 스크롤 표시 (내용이 넘칠 경우) */
+}
+
+#coreInfo table {
+  width: 100%; /* table의 너비를 100%로 설정하여 div에 맞게 확장됩니다. */
+  border-collapse: collapse; /* 테이블 셀 테두리 병합 (선택사항) */
+}
+
+#coreInfo th,
+#coreInfo td {
+  padding: 8px; /* 셀 안의 여백 설정 */
+  text-align: center; /* 가운데 정렬 (선택사항) */
+  border: 1px solid #ddd; /* 셀 테두리 스타일 (선택사항) */
+}
+
+#coreInfo img {
+  width: 100%;
+}
+
+#image-preview {
+  position: relative;
+  width: 90vw; /* 브라우저 창 너비의 100% */
+  margin: auto; /* 중앙 정렬 */
+  display: block; /* 미리보기가 항상 보이도록 설정 */
+  overflow: hidden; /* 내부 요소가 범위를 벗어나지 않도록 설정 */
+}
+
+#image-preview img {
+  width: 100%; /* 이미지 크기를 div 크기에 맞춤 */
+  display: block;
+}
+
+#image-preview:hover {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.2
+  ); /* 마우스를 올리면 투명 검정색 배경 추가 */
+}
+
+#image-preview:hover .button {
+  display: block; /* 이미지 프리뷰에 마우스를 올리면 버튼 표시 */
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* 버튼의 배경을 반투명하게 설정 */
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px; /* 버튼의 패딩 조정 */
+  z-index: 100;
+  display: none; /* 기본적으로 버튼은 숨겨져 있음 */
+  font-size: 20px; /* 화살표 크기 */
+}
+
+.button.prev {
+  left: 0; /* 이미지의 왼쪽에 위치 */
+  border-radius: 0 5px 5px 0; /* 오른쪽 상단과 하단에 둥근 모서리 추가 */
+}
+
+.button.next {
+  right: 0; /* 이미지의 오른쪽에 위치 */
+  border-radius: 5px 0 0 5px; /* 왼쪽 상단과 하단에 둥근 모서리 추가 */
+}
+
+.button:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* 버튼에 마우스를 올리면 더 덜 투명하게 */
+}
+
+.button.prev::before {
+  content: "\2190"; /* 왼쪽 화살표 유니코드 문자 */
+  color: #000; /* 화살표 색상 */
+}
+
+.button.next::before {
+  content: "\2192"; /* 오른쪽 화살표 유니코드 문자 */
+  color: #000; /* 화살표 색상 */
+}
+
+.optionGroup {
+  margin-top: 10px;
+}
+
+/* 토스트 메시지 스타일 */
+#toast {
+  visibility: hidden; /* 기본적으로 숨김 */
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333; /* 배경색을 검정색 계열로 조정 */
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+/* 토스트 메시지 보이기 */
+#toast.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  -webkit-animation-fill-mode: forwards; /* 애니메이션 완료 후 스타일 유지 */
+  animation-fill-mode: forwards;
+}
+
+/* gif */
+#gif-container {
+  position: fixed; /* 화면에 고정되어 스크롤해도 같은 위치에 유지 */
+  top: 50%; /* 상단에서부터 50% 위치에 배치 */
+  left: 50%; /* 왼쪽에서부터 50% 위치에 배치 */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* 중앙 정렬을 위해 자신의 크기의 반만큼 이동 */
+  z-index: 9999; /* 다른 모든 요소들보다 앞에 오도록 z-index 값 설정 */
+}
+
+/* 애니메이션 */
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+  /* 파일 입력 및 제출 버튼 */
+  input[type="file"],
+  input[type="button"],
+  input[type="submit"],
+  button,
+  select {
+    padding: 20px 30px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
