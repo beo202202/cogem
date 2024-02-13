@@ -232,8 +232,8 @@ function getSelectedClassName() {
   return className;
 }
 
-function addContentToResult2(className, main, sub1, sub2, info) {
-  // var className = "Test_Eunwol";
+function addContentToResult2() {
+  showToast("테이블 만들기");
   var className = getSelectedClassName();
   console.log(className);
 
@@ -333,8 +333,8 @@ function createImageUrl(basePath, cacheBuster) {
   return basePath ? `${basePath}?v=${cacheBuster}` : "";
 }
 
-function testCompareImages() {
-  showToast("testCompareImages()");
+function compareImages() {
+  showToast("분석 보기");
   var radioButtons = document.querySelectorAll(
     'input[type="radio"][name="class"]'
   ); // 'class' 이름을 가진 모든 라디오 버튼 선택
@@ -370,7 +370,7 @@ function testCompareImages() {
   // or
   // var queryString = "username=사용자명&password=비밀번호";
   $.ajax({
-    url: "/test_compare_images",
+    url: "/compare_images",
     type: "POST",
     processData: false,
     contentType: false,
@@ -456,6 +456,8 @@ function pageLoaded() {
   // 드롭 다운 리스트 중 '모험가'를 선택
   showOptions(document.getElementById("characterSelect").value);
 
+  // 'files' 에 change 이벤트 리스너 추가
+  document.getElementById("files").addEventListener("change", previewImage);
   // 이미지 프리뷰 앞뒤에 이벤트 리스너 추가
   document
     .getElementById("button prev")
@@ -468,21 +470,18 @@ function pageLoaded() {
   document
     .getElementById("checkCoreInfo")
     .addEventListener("click", checkCoreInfo);
-  // 'makeTable' 버튼에 이벤트 리스너 추가
+  // '테이블 만들기' 버튼에 이벤트 리스너 추가
   document
     .getElementById("makeTable")
     .addEventListener("click", addContentToResult2);
-  // 'files' 에 change 이벤트 리스너 추가
-  document.getElementById("files").addEventListener("change", previewImage);
+  // '분석 보기' 버튼에 이벤트 리스너 추가
+  document
+    .getElementById("viewAnalyze")
+    .addEventListener("click", compareImages);
   // 'characterSelect' 에 change 이벤트 리스너 추가
   document
     .getElementById("characterSelect")
     .addEventListener("change", function (event) {
       showOptions(this.value);
     });
-
-  // 'viewAnalyze' 버튼에 이벤트 리스너 추가
-  document
-    .getElementById("viewAnalyze")
-    .addEventListener("click", testCompareImages);
 }
