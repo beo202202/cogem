@@ -16,7 +16,7 @@ __pycache__/
 
 ### Flask ###
 instance/*
-!instance/.gitignore
+# !instance/.gitignore
 .webassets-cache
 .env
 
