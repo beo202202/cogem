@@ -264,7 +264,8 @@ function addContentToResult2() {
             </table>
           </div>
         </div>
-        <div class="cell">
+        <div id="imageCounts" class="cell">
+          <!-- Image counts will be inserted here -->
           2칸-2
         </div>
       </div>
@@ -350,36 +351,19 @@ function compareImages() {
 
   var formData = new FormData();
   var selectedValue = $("#characterSelect").val();
-  console.log(selectedValue);
+  // console.log(selectedValue);
   formData.append("occupation", selectedValue);
 
   var className = getSelectedClassName();
-  console.log(className);
+  // console.log(className);
   formData.append("className", className);
-  // formData.append('file', $('#file-input')[0].files[0]);
-  // formData.append('username', '사용자명');
-  // var formData = "static/processed/image_01/extracted_01.png";
 
-  // or
-
-  // var jsonData = {
-  //   username: "사용자명",
-  //   password: "비밀번호",
-  // };
-
-  // or
-  // var queryString = "username=사용자명&password=비밀번호";
   $.ajax({
     url: "/compare_images",
     type: "POST",
     processData: false,
     contentType: false,
     data: formData,
-
-    // contentType: "application/json",
-    // data: JSON.stringify(jsonData),
-
-    // data: queryString,
     success: function (response) {
       showToast("성공함");
       console.log("비교 결과:", response);
